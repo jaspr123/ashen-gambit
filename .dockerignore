@@ -1,0 +1,14 @@
+node_modules
+**/node_modules
+dist
+**/dist
+.git
+.qa
+.asset-cache
+tools/scratch
+apps/server/data
+apps/server/uploads
+apps/client/public/engine
+*.log
+.env
+deploy/.env

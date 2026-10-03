@@ -1,0 +1,24 @@
+{
+  "name": "ashen-gambit",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Post-apocalyptic multiplayer 3D battle chess — every capture is an on-board fight.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,client -c yellow,cyan \"npm:dev -w @ashen/server\" \"npm:dev -w @ashen/client\"",
+    "build": "npm run build -w @ashen/client && npm run build -w @ashen/server",
+    "start": "npm run start -w @ashen/server",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "assets:build": "blender -b --factory-startup -P tools/blender/build_polygon.py -- . && blender -b --factory-startup -P tools/blender/build_environment.py -- .",
+    "assets:optimize": "node tools/asset-pipeline/optimize-assets.mjs"
+  },
+  "devDependencies": {
+    "@gltf-transform/cli": "^4.5.1",
+    "concurrently": "^9.2.0",
+    "typescript": "^5.9.2"
+  }
+}

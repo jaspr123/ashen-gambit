@@ -1,0 +1,329 @@
+{
+  "version": 3,
+  "style": "polygon",
+  "factions": {
+    "remnants": {
+      "pieces": {
+        "pawn": {
+          "file": "factions/remnants/pawn.glb",
+          "node": "remnants_pawn",
+          "animations": "humanoid",
+          "mechanical": false
+        },
+        "knight": {
+          "file": "factions/remnants/knight.glb",
+          "node": "remnants_knight",
+          "animations": "self",
+          "clips": {
+            "IDLE": "Idle",
+            "MOVE": "Walk",
+            "RUN": "Gallop",
+            "ATTACK_READY": "Idle_HitReact2",
+            "ATTACK_PRIMARY": "Attack_Headbutt",
+            "ATTACK_HEAVY": "Attack_Kick",
+            "ATTACK_STAB": "Attack_Headbutt",
+            "HIT_LIGHT": "Idle_HitReact1",
+            "HIT_HEAVY": "Idle_HitReact2",
+            "DEATH_LIGHT": "Death",
+            "DEATH_HEAVY": "Death",
+            "JUMP": "Gallop_Jump"
+          },
+          "mechanical": false
+        },
+        "bishop": {
+          "file": "factions/remnants/bishop.glb",
+          "node": "remnants_bishop",
+          "animations": "humanoid",
+          "mechanical": false
+        },
+        "rook": {
+          "file": "factions/remnants/rook.glb",
+          "node": "remnants_rook",
+          "animations": "humanoid",
+          "mechanical": false
+        },
+        "queen": {
+          "file": "factions/remnants/queen.glb",
+          "node": "remnants_queen",
+          "animations": "humanoid",
+          "mechanical": false
+        },
+        "king": {
+          "file": "factions/remnants/king.glb",
+          "node": "remnants_king",
+          "animations": "humanoid",
+          "mechanical": false
+        }
+      }
+    },
+    "machines": {
+      "pieces": {
+        "pawn": {
+          "file": "factions/machines/pawn.glb",
+          "node": "machines_pawn",
+          "animations": "humanoid",
+          "mechanical": true
+        },
+        "knight": {
+          "file": "factions/machines/knight.glb",
+          "node": "machines_knight",
+          "animations": "self",
+          "clips": {
+            "IDLE": "Idle",
+            "MOVE": "Walk",
+            "RUN": "Gallop",
+            "ATTACK_READY": "Idle_HitReact2",
+            "ATTACK_PRIMARY": "Attack_Headbutt",
+            "ATTACK_HEAVY": "Attack_Kick",
+            "ATTACK_STAB": "Attack_Headbutt",
+            "HIT_LIGHT": "Idle_HitReact1",
+            "HIT_HEAVY": "Idle_HitReact2",
+            "DEATH_LIGHT": "Death",
+            "DEATH_HEAVY": "Death",
+            "JUMP": "Gallop_Jump"
+          },
+          "mechanical": false
+        },
+        "bishop": {
+          "file": "factions/machines/bishop.glb",
+          "node": "machines_bishop",
+          "animations": "humanoid",
+          "mechanical": true
+        },
+        "rook": {
+          "file": "factions/machines/rook.glb",
+          "node": "machines_rook",
+          "animations": "humanoid",
+          "mechanical": true
+        },
+        "queen": {
+          "file": "factions/machines/queen.glb",
+          "node": "machines_queen",
+          "animations": "humanoid",
+          "mechanical": true
+        },
+        "king": {
+          "file": "factions/machines/king.glb",
+          "node": "machines_king",
+          "animations": "humanoid",
+          "mechanical": true
+        }
+      }
+    },
+    "wastelanders": {
+      "pieces": {
+        "pawn": {
+          "file": "factions/wastelanders/pawn.glb",
+          "node": "wastelanders_pawn",
+          "animations": "humanoid",
+          "mechanical": false
+        },
+        "knight": {
+          "file": "factions/wastelanders/knight.glb",
+          "node": "wastelanders_knight",
+          "animations": "self",
+          "clips": {
+            "IDLE": "Idle",
+            "MOVE": "Walk",
+            "RUN": "Gallop",
+            "ATTACK_READY": "Idle_HitReact2",
+            "ATTACK_PRIMARY": "Attack_Headbutt",
+            "ATTACK_HEAVY": "Attack_Kick",
+            "ATTACK_STAB": "Attack_Headbutt",
+            "HIT_LIGHT": "Idle_HitReact1",
+            "HIT_HEAVY": "Idle_HitReact2",
+            "DEATH_LIGHT": "Death",
+            "DEATH_HEAVY": "Death",
+            "JUMP": "Gallop_Jump"
+          },
+          "mechanical": false
+        },
+        "bishop": {
+          "file": "factions/wastelanders/bishop.glb",
+          "node": "wastelanders_bishop",
+          "animations": "humanoid",
+          "mechanical": false
+        },
+        "rook": {
+          "file": "factions/wastelanders/rook.glb",
+          "node": "wastelanders_rook",
+          "animations": "humanoid",
+          "mechanical": false
+        },
+        "queen": {
+          "file": "factions/wastelanders/queen.glb",
+          "node": "wastelanders_queen",
+          "animations": "humanoid",
+          "mechanical": false
+        },
+        "king": {
+          "file": "factions/wastelanders/king.glb",
+          "node": "wastelanders_king",
+          "animations": "humanoid",
+          "mechanical": false
+        }
+      }
+    },
+    "vault": {
+      "pieces": {
+        "pawn": {
+          "file": "factions/vault/pawn.glb",
+          "node": "vault_pawn",
+          "animations": "humanoid",
+          "mechanical": false
+        },
+        "knight": {
+          "file": "factions/vault/knight.glb",
+          "node": "vault_knight",
+          "animations": "self",
+          "clips": {
+            "IDLE": "Idle",
+            "MOVE": "Walk",
+            "RUN": "Gallop",
+            "ATTACK_READY": "Idle_HitReact2",
+            "ATTACK_PRIMARY": "Attack_Headbutt",
+            "ATTACK_HEAVY": "Attack_Kick",
+            "ATTACK_STAB": "Attack_Headbutt",
+            "HIT_LIGHT": "Idle_HitReact1",
+            "HIT_HEAVY": "Idle_HitReact2",
+            "DEATH_LIGHT": "Death",
+            "DEATH_HEAVY": "Death",
+            "JUMP": "Gallop_Jump"
+          },
+          "mechanical": false
+        },
+        "bishop": {
+          "file": "factions/vault/bishop.glb",
+          "node": "vault_bishop",
+          "animations": "humanoid",
+          "mechanical": false
+        },
+        "rook": {
+          "file": "factions/vault/rook.glb",
+          "node": "vault_rook",
+          "animations": "humanoid",
+          "mechanical": false
+        },
+        "queen": {
+          "file": "factions/vault/queen.glb",
+          "node": "vault_queen",
+          "animations": "humanoid",
+          "mechanical": false
+        },
+        "king": {
+          "file": "factions/vault/king.glb",
+          "node": "vault_king",
+          "animations": "humanoid",
+          "mechanical": false
+        }
+      }
+    }
+  },
+  "animations": {
+    "humanoid": "anims/polygon_humanoid.glb",
+    "clips": [
+      "Idle",
+      "Walk",
+      "Run",
+      "Death_01",
+      "Dead_01",
+      "Death_02",
+      "Dead_02",
+      "Falling",
+      "Standing_Jump",
+      "Salute",
+      "GrenadeThrow",
+      "CrossArms",
+      "Crouch_Idle",
+      "Idle_CheckWatch",
+      "Melee_OneHanded",
+      "Melee_TwoHanded",
+      "Melee_Stab",
+      "Shoot_Rifle",
+      "Shoot_Handgun",
+      "Shoot_Shotgun"
+    ]
+  },
+  "derby": {
+    "remnants": {
+      "b": {
+        "file": "factions/remnants/jockey.glb",
+        "node": "remnants_jockey",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      }
+    },
+    "machines": {
+      "b": {
+        "file": "factions/machines/jockey.glb",
+        "node": "machines_jockey",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      }
+    },
+    "wastelanders": {
+      "b": {
+        "file": "factions/wastelanders/jockey.glb",
+        "node": "wastelanders_jockey",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      }
+    },
+    "vault": {
+      "b": {
+        "file": "factions/vault/jockey.glb",
+        "node": "vault_jockey",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+# Production stack on a Docker + Traefik host (Traefik on the host network, docker provider).
+# Served at https://ai.jteam.ca/Ashengambit — Traefik strips the prefix before it reaches the app.
+# Secrets live in deploy/.env (POSTGRES_PASSWORD, ADMIN_NAMES); never commit it.
+name: ashengambit
+services:
+  app:
+    build:
+      context: ..
+      args: { VITE_BASE: /Ashengambit/ }
+    image: ashengambit:latest
+    restart: unless-stopped
+    depends_on:
+      db: { condition: service_healthy }
+    environment:
+      NODE_ENV: production
+      PORT: "3001"
+      DATABASE_URL: postgres://ashen:${POSTGRES_PASSWORD}@db:5432/ashen
+      DEV_TOOLS: "0"
+      ADMIN_NAMES: ${ADMIN_NAMES:-}
+      # Players who enter this code under Profile -> Account -> Admin access become admins.
+      ADMIN_CODE: ${ADMIN_CODE:-}
+      CORS_ORIGIN: https://ai.jteam.ca
+    volumes: [uploads:/data/uploads]
+    ports: ["127.0.0.1:3101:3001"]
+    labels:
+      - traefik.enable=true
+      - "traefik.http.routers.ashengambit.rule=Host(`ai.jteam.ca`) && (PathPrefix(`/Ashengambit`) || PathPrefix(`/ashengambit`))"
+      - traefik.http.routers.ashengambit.priority=100
+      - traefik.http.routers.ashengambit.entrypoints=websecure
+      - traefik.http.routers.ashengambit.tls.certresolver=letsencrypt
+      - traefik.http.routers.ashengambit.middlewares=ashen-slash,ashen-strip
+      # /Ashengambit (no slash, any case) -> /Ashengambit/ so relative paths resolve.
+      - "traefik.http.middlewares.ashen-slash.redirectregex.regex=^(https?://[^/]+)/(?i:ashengambit)$$"
+      - "traefik.http.middlewares.ashen-slash.redirectregex.replacement=$${1}/Ashengambit/"
+      - traefik.http.middlewares.ashen-slash.redirectregex.permanent=true
+      - traefik.http.middlewares.ashen-strip.stripprefix.prefixes=/Ashengambit,/ashengambit
+      # Traefik (host network) reaches the container on its compose network, like the other sites.
+      - traefik.docker.network=ashengambit_default
+      - traefik.http.services.ashengambit.loadbalancer.server.port=3001
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ashen
+      POSTGRES_DB: ashen
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes: [dbdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ashen -d ashen"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  dbdata:
+  uploads:
