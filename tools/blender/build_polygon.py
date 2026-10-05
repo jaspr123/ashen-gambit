@@ -93,6 +93,39 @@ ROSTER = {
 }
 BULK = {"rook": 1.12}
 
+# Extra Derby runners, five per faction: (character, weapon, coat). Exported as factions/<f>/jockey_j1..j5.glb and
+# referenced by `look` in packages/shared/src/derby/data.ts.
+DERBY_JOCKEYS = {
+    "remnants": [
+        (("generic", "SM_Gen_Chr_Street_Male_01"), ("generic", "SM_Gen_Wep_Pickaxe_01", "melee"), "sorrel"),
+        (("generic", "SM_Gen_Chr_Street_Female_02"), ("western", "SM_Wep_Rifle_01", "gun"), "black"),
+        (("generic", "SM_Gen_Chr_Peasent_Male_01"), ("generic", "SM_Gen_Wep_Axe_01", "melee"), "dun"),
+        (("western", "Character_Business_Man_01"), ("western", "SM_Wep_Shotgun_01", "gun"), "buckskin"),
+        (("generic", "SM_Gen_Chr_Prisoner_Female_01"), ("scifi", "SM_Wep_Knife_01", "melee"), "roan"),
+    ],
+    "machines": [
+        (("generic", "SM_Gen_Chr_Robot_01"), ("scifi", "SM_Wep_Sword_01", "melee"), "grey"),
+        (("scifi", "Character_Robot_01"), ("scifi", "SM_Wep_Knife_01", "melee"), "liver"),
+        (("scifi", "Character_CyberPunk_Male_01"), ("scifi", "SM_Wep_MachinePistol_Gen2_01", "gun"), "black"),
+        (("scifi", "Character_Alien_Male_02"), ("scifi", "SM_Wep_Rifle_Laser_01", "gun"), "white"),
+        (("scifi", "Character_Cyber_Female_01"), ("scifi", "SM_Wep_Shotgun_Plasma_01", "gun"), "roan"),
+    ],
+    "wastelanders": [
+        (("scifi", "Character_Junky_Female_01"), ("pirates", "SM_Wep_Cutlass_01", "melee"), "chestnut"),
+        (("scifi", "Character_Muscle_Male_01"), ("generic", "SM_Gen_Wep_Axe_01", "melee"), "liver"),
+        (("generic", "SM_Gen_Chr_Skeleton_01"), ("western", "SM_Wep_Rifle_01", "gun"), "white"),
+        (("generic", "SM_Gen_Chr_Peasent_Female_01"), ("western", "SM_Wep_Revolver_02", "gun"), "buckskin"),
+        (("generic", "SM_Gen_Chr_Prisoner_Male_01"), ("generic", "SM_Gen_Wep_Pickaxe_01", "melee"), "bay"),
+    ],
+    "vault": [
+        (("generic", "SM_Gen_Chr_Street_Female_03"), ("scifi", "SM_Wep_Revolver_01", "gun"), "white"),
+        (("scifi", "Character_Rich_Female_01"), ("spy", "SM_Wep_SMG_01", "gun"), "chestnut"),
+        (("scifi", "Character_Monk_Male_01"), ("scifi", "SM_Wep_Syringe_Gun_01", "gun"), "palomino"),
+        (("spy", "Chr_Male_Spy_Bowtie"), ("scifi", "SM_Wep_Sniper_01", "gun"), "black"),
+        (("generic", "SM_Gen_Chr_Street_Male_03"), ("spy", "SM_Wep_Pistol_01", "gun"), "sorrel"),
+    ],
+}
+
 # Coats: (Main, Main_Dark, Main_Light, Hair, Muzzle, Hooves)
 COATS = {
     "bay":      ("#4a2a16", "#2c180b", "#62381e", "#120e0c", "#1c120c", "#2a2420"),
@@ -101,6 +134,11 @@ COATS = {
     "grey":     ("#8e8b86", "#615e5a", "#aeaaa4", "#d6d3cd", "#3a3836", "#2e2b28"),
     "palomino": ("#b98a4c", "#8c6534", "#d2a66a", "#ece0c2", "#4a3828", "#3a3028"),
     "dun":      ("#8b6b45", "#5d452c", "#a6855c", "#2a1d13", "#2a2016", "#2e2620"),
+    "sorrel":   ("#9a4a1c", "#6c3212", "#b45e2a", "#b8642c", "#2e1a0e", "#3a2c22"),
+    "buckskin": ("#c09a5a", "#8e6e3a", "#d6b678", "#141010", "#2a2018", "#221c18"),
+    "roan":     ("#7a6a68", "#4e4240", "#9a8a88", "#1e1614", "#2a2220", "#2a2624"),
+    "liver":    ("#4a2414", "#30160c", "#5e3020", "#3a1c10", "#1e120c", "#2a221e"),
+    "white":    ("#d8d4cc", "#aaa69e", "#ece8e0", "#f0ece4", "#8a7a70", "#4a4440"),
 }
 
 # Canonical (Sci-Fi City) right-hand finger names; Generic uses _L/_R suffixes.
@@ -431,7 +469,8 @@ def barding(harm):
             parent_to_bone(e, harm, b.name); parts.append(e)
     return parts
 
-def build_mount(rig, meshes, faction, who, coat, name):
+def build_mount(rig, meshes, faction, who, coat, name, spec=None):
+    """`spec` = ((pack, mesh), (pack, weapon, kind)) overrides the faction roster's `who` entry."""
     cfg = ROSTER[faction]
     objs = import_gltf(HORSE)
     harm = next(o for o in objs if o.type == "ARMATURE")
@@ -451,7 +490,7 @@ def build_mount(rig, meshes, faction, who, coat, name):
     if cfg.get("barding"): parts += barding(harm)
 
     # ---- rider, posed and baked to a static mesh
-    (cpack, cmesh), (wpack, wfile, kind) = cfg[who]
+    (cpack, cmesh), (wpack, wfile, kind) = spec or cfg[who]
     rarm, rme = make_character(rig, meshes, f"{cpack}:{cmesh}", f"{name}_rider_tmp")
     rarm.data.pose_position = "POSE"
     bpy.context.view_layer.update()
@@ -538,6 +577,19 @@ def export_piece(root, objs, path, horse=False):
 KNIGHT_CLIPS = {"IDLE": "Idle", "MOVE": "Walk", "RUN": "Gallop", "ATTACK_READY": "Idle_HitReact2", "ATTACK_PRIMARY": "Attack_Headbutt", "ATTACK_HEAVY": "Attack_Kick",
                 "ATTACK_STAB": "Attack_Headbutt", "HIT_LIGHT": "Idle_HitReact1", "HIT_HEAVY": "Idle_HitReact2", "DEATH_LIGHT": "Death", "DEATH_HEAVY": "Death", "JUMP": "Gallop_Jump"}
 
+def build_derby_jockeys(rig, meshes, faction, manifest, layout, fi):
+    for ji, (char, wep, coat) in enumerate(DERBY_JOCKEYS.get(faction, []), start=1):
+        key = f"j{ji}"
+        try:
+            root, objs = build_mount(rig, meshes, faction, "jockey", coat, f"{faction}_jockey_{key}", spec=(char, wep))
+            export_piece(root, objs, os.path.join(OUT, "factions", faction, f"jockey_{key}.glb"), horse=True)
+            manifest.setdefault("derby", {}).setdefault(faction, {})[key] = {"file": f"factions/{faction}/jockey_{key}.glb", "node": root.name, "clips": KNIGHT_CLIPS}
+            layout[root.name] = ((6 + ji) * 1.2 - 3.0, fi * 1.6)
+        except Exception as e:
+            import traceback; traceback.print_exc()
+            log("FAILED", faction, "jockey", key, e)
+
+
 def main():
     bpy.ops.wm.read_factory_settings(use_empty=True)
     bpy.context.scene.render.fps = 30
@@ -547,8 +599,15 @@ def main():
     layout = {}
     order = ["pawn", "knight", "bishop", "rook", "queen", "king"]
     only = [a for a in bf.ARGS[1:] if not a.startswith("--")]
+    derby_only = "--derby" in bf.ARGS
+    if derby_only:
+        # Rebuild just the extra Derby runners and merge them into the existing manifest.
+        manifest = json.load(open(os.path.join(OUT, "manifest.json")))
     for fi, faction in enumerate(ROSTER):
         if only and faction not in only: continue
+        if derby_only:
+            build_derby_jockeys(rig, meshes, faction, manifest, layout, fi)
+            continue
         entry = {"pieces": {}}
         coat_a, coat_b = ROSTER[faction]["coat"]
         for pi, pc in enumerate(order):
@@ -568,13 +627,14 @@ def main():
         try:
             root, objs = build_mount(rig, meshes, faction, "jockey", coat_b, f"{faction}_jockey")
             export_piece(root, objs, os.path.join(OUT, "factions", faction, "jockey.glb"), horse=True)
-            manifest["derby"][faction] = {"b": {"file": f"factions/{faction}/jockey.glb", "node": root.name, "clips": KNIGHT_CLIPS}}
+            manifest["derby"].setdefault(faction, {})["b"] = {"file": f"factions/{faction}/jockey.glb", "node": root.name, "clips": KNIGHT_CLIPS}
             layout[root.name] = (6 * 1.2 - 3.0, fi * 1.6)
         except Exception as e:
             import traceback; traceback.print_exc()
             log("FAILED", faction, "jockey", e)
+        build_derby_jockeys(rig, meshes, faction, manifest, layout, fi)
         manifest["factions"][faction] = entry
-    if not only:
+    if not only or derby_only:
         # Keep the environment entry written by build_environment.py.
         try:
             old = json.load(open(os.path.join(OUT, "manifest.json")))

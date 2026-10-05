@@ -37,11 +37,12 @@ export interface Settings {
 }
 
 const KEY = 'ashen.settings.v1';
+const AUDIO_REV = 2;
 
 function defaults(): Settings {
   return {
     graphics: { preset: 'high', ...GRAPHICS_PRESETS.high },
-    audio: { master: 0.8, music: 0.45, ambience: 0.6, sfx: 0.85, voice: 0.8, ui: 0.6, muted: false },
+    audio: { master: 0.8, music: 0.22, ambience: 0.3, sfx: 0.85, voice: 0.8, ui: 0.6, muted: false },
     combatSpeed: 1, cameraSensitivity: 1, showCoordinates: true, showLegalMoves: true, autoQueen: false, reduceMotion: false, showFps: false,
   };
 }
@@ -51,8 +52,14 @@ function load(): Settings {
     const raw = localStorage.getItem(KEY);
     if (raw) {
       const d = defaults();
-      const s = JSON.parse(raw) as Partial<Settings>;
-      return { ...d, ...s, graphics: { ...d.graphics, ...s.graphics }, audio: { ...d.audio, ...s.audio } };
+      const s = JSON.parse(raw) as Partial<Settings> & { audioRev?: number };
+      const audio = { ...d.audio, ...s.audio };
+      // Rev 2 halved the music/ambience defaults; bring older saved levels down with them.
+      if ((s.audioRev ?? 1) < AUDIO_REV) {
+        audio.music /= 2; audio.ambience /= 2;
+        localStorage.setItem(KEY, JSON.stringify({ ...s, audio, audioRev: AUDIO_REV }));
+      }
+      return { ...d, ...s, graphics: { ...d.graphics, ...s.graphics }, audio };
     }
   } catch { /* storage unavailable */ }
   return defaults();
@@ -68,7 +75,7 @@ interface SettingsStore extends Settings {
 export const useSettings = create<SettingsStore>((set, get) => {
   const persist = () => {
     const { set: _a, setPreset: _b, setGraphics: _c, setAudio: _d, ...rest } = get();
-    try { localStorage.setItem(KEY, JSON.stringify(rest)); } catch { /* ignore */ }
+    try { localStorage.setItem(KEY, JSON.stringify({ ...rest, audioRev: AUDIO_REV })); } catch { /* ignore */ }
   };
   return {
     ...load(),

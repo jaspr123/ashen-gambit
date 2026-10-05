@@ -263,12 +263,192 @@
           "DEATH_HEAVY": "Death",
           "JUMP": "Gallop_Jump"
         }
+      },
+      "j1": {
+        "file": "factions/remnants/jockey_j1.glb",
+        "node": "remnants_jockey_j1",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j2": {
+        "file": "factions/remnants/jockey_j2.glb",
+        "node": "remnants_jockey_j2",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j3": {
+        "file": "factions/remnants/jockey_j3.glb",
+        "node": "remnants_jockey_j3",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j4": {
+        "file": "factions/remnants/jockey_j4.glb",
+        "node": "remnants_jockey_j4",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j5": {
+        "file": "factions/remnants/jockey_j5.glb",
+        "node": "remnants_jockey_j5",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
       }
     },
     "machines": {
       "b": {
         "file": "factions/machines/jockey.glb",
         "node": "machines_jockey",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j1": {
+        "file": "factions/machines/jockey_j1.glb",
+        "node": "machines_jockey_j1",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j2": {
+        "file": "factions/machines/jockey_j2.glb",
+        "node": "machines_jockey_j2",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j3": {
+        "file": "factions/machines/jockey_j3.glb",
+        "node": "machines_jockey_j3",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j4": {
+        "file": "factions/machines/jockey_j4.glb",
+        "node": "machines_jockey_j4",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j5": {
+        "file": "factions/machines/jockey_j5.glb",
+        "node": "machines_jockey_j5",
         "clips": {
           "IDLE": "Idle",
           "MOVE": "Walk",
@@ -303,12 +483,192 @@
           "DEATH_HEAVY": "Death",
           "JUMP": "Gallop_Jump"
         }
+      },
+      "j1": {
+        "file": "factions/wastelanders/jockey_j1.glb",
+        "node": "wastelanders_jockey_j1",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j2": {
+        "file": "factions/wastelanders/jockey_j2.glb",
+        "node": "wastelanders_jockey_j2",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j3": {
+        "file": "factions/wastelanders/jockey_j3.glb",
+        "node": "wastelanders_jockey_j3",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j4": {
+        "file": "factions/wastelanders/jockey_j4.glb",
+        "node": "wastelanders_jockey_j4",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j5": {
+        "file": "factions/wastelanders/jockey_j5.glb",
+        "node": "wastelanders_jockey_j5",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
       }
     },
     "vault": {
       "b": {
         "file": "factions/vault/jockey.glb",
         "node": "vault_jockey",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j1": {
+        "file": "factions/vault/jockey_j1.glb",
+        "node": "vault_jockey_j1",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j2": {
+        "file": "factions/vault/jockey_j2.glb",
+        "node": "vault_jockey_j2",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j3": {
+        "file": "factions/vault/jockey_j3.glb",
+        "node": "vault_jockey_j3",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j4": {
+        "file": "factions/vault/jockey_j4.glb",
+        "node": "vault_jockey_j4",
+        "clips": {
+          "IDLE": "Idle",
+          "MOVE": "Walk",
+          "RUN": "Gallop",
+          "ATTACK_READY": "Idle_HitReact2",
+          "ATTACK_PRIMARY": "Attack_Headbutt",
+          "ATTACK_HEAVY": "Attack_Kick",
+          "ATTACK_STAB": "Attack_Headbutt",
+          "HIT_LIGHT": "Idle_HitReact1",
+          "HIT_HEAVY": "Idle_HitReact2",
+          "DEATH_LIGHT": "Death",
+          "DEATH_HEAVY": "Death",
+          "JUMP": "Gallop_Jump"
+        }
+      },
+      "j5": {
+        "file": "factions/vault/jockey_j5.glb",
+        "node": "vault_jockey_j5",
         "clips": {
           "IDLE": "Idle",
           "MOVE": "Walk",

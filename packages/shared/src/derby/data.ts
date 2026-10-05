@@ -107,6 +107,8 @@ export interface DerbyHorseDef {
   faction: BuiltinFactionId;
   /** Which side tint of the faction's knight model to use (variety between same-faction runners). */
   tint: 'w' | 'b';
+  /** Dedicated Derby model (key in the asset manifest's derby section for this faction); falls back to `tint`. */
+  look?: string;
   silks: string;
   weapon: DerbyWeaponId;
   stats: DerbyStats;
@@ -129,6 +131,26 @@ export const DERBY_ROSTER: DerbyHorseDef[] = [
   { id: 'h14', horse: 'Widowmaker', jockey: 'Ruby Six', faction: 'wastelanders', tint: 'b', silks: '#601020', weapon: 'shotgun', stats: { speed: 7, stamina: 5, grit: 5, aggression: 10, accuracy: 6 } },
   { id: 'h15', horse: 'Tin Stallion', jockey: 'Unit 9-Lima', faction: 'machines', tint: 'b', silks: '#808060', weapon: 'chain', stats: { speed: 5, stamina: 10, grit: 8, aggression: 5, accuracy: 5 } },
   { id: 'h16', horse: 'Geiger', jockey: 'Pip Lantern', faction: 'vault', tint: 'b', silks: '#80e060', weapon: 'crossbow', stats: { speed: 9, stamina: 5, grit: 4, aggression: 4, accuracy: 8 } },
+  { id: 'h17', horse: 'Tin Can Tommy', jockey: 'Ezra Bellweather', faction: 'remnants', tint: 'b', look: 'j1', silks: '#b07838', weapon: 'pipe', stats: { speed: 7, stamina: 7, grit: 6, aggression: 6, accuracy: 5 } },
+  { id: 'h18', horse: 'Midnight Ration', jockey: 'Rosa Delgado', faction: 'remnants', tint: 'b', look: 'j2', silks: '#283850', weapon: 'crossbow', stats: { speed: 6, stamina: 8, grit: 5, aggression: 4, accuracy: 9 } },
+  { id: 'h19', horse: 'Plough Horse', jockey: 'Hob Tanner', faction: 'remnants', tint: 'b', look: 'j3', silks: '#8a6a3a', weapon: 'chain', stats: { speed: 5, stamina: 9, grit: 9, aggression: 6, accuracy: 4 } },
+  { id: 'h20', horse: 'Bankroll', jockey: 'Mr. Sterling Pratt', faction: 'remnants', tint: 'b', look: 'j4', silks: '#d8c070', weapon: 'shotgun', stats: { speed: 8, stamina: 5, grit: 5, aggression: 7, accuracy: 6 } },
+  { id: 'h21', horse: 'Jailbreak', jockey: 'Nell "Shiv" Carver', faction: 'remnants', tint: 'b', look: 'j5', silks: '#e08020', weapon: 'cattle_prod', stats: { speed: 9, stamina: 5, grit: 5, aggression: 7, accuracy: 5 } },
+  { id: 'h22', horse: 'Servo Sally', jockey: 'Unit 4-Golf', faction: 'machines', tint: 'b', look: 'j1', silks: '#9098a0', weapon: 'cattle_prod', stats: { speed: 6, stamina: 9, grit: 8, aggression: 4, accuracy: 6 } },
+  { id: 'h23', horse: 'Boltcutter', jockey: 'Unit 2-Bravo', faction: 'machines', tint: 'b', look: 'j2', silks: '#d05020', weapon: 'chain', stats: { speed: 7, stamina: 7, grit: 7, aggression: 7, accuracy: 4 } },
+  { id: 'h24', horse: 'Neon Gelding', jockey: 'Vex Kowalski', faction: 'machines', tint: 'b', look: 'j3', silks: '#e040c0', weapon: 'flare_gun', stats: { speed: 9, stamina: 5, grit: 4, aggression: 6, accuracy: 7 } },
+  { id: 'h25', horse: 'Xeno Express', jockey: "Zz'karr", faction: 'machines', tint: 'b', look: 'j4', silks: '#40e0a0', weapon: 'crossbow', stats: { speed: 8, stamina: 6, grit: 5, aggression: 4, accuracy: 9 } },
+  { id: 'h26', horse: 'Chrome Widow', jockey: 'Lyra Voss', faction: 'machines', tint: 'b', look: 'j5', silks: '#c0d0ff', weapon: 'shotgun', stats: { speed: 7, stamina: 6, grit: 6, aggression: 8, accuracy: 6 } },
+  { id: 'h27', horse: 'Needle Park', jockey: 'Dee Spoon', faction: 'wastelanders', tint: 'b', look: 'j1', silks: '#9a4a8a', weapon: 'pipe', stats: { speed: 8, stamina: 4, grit: 6, aggression: 9, accuracy: 4 } },
+  { id: 'h28', horse: 'Meat Wagon', jockey: 'Brutus Kane', faction: 'wastelanders', tint: 'b', look: 'j2', silks: '#7a2010', weapon: 'pipe', stats: { speed: 6, stamina: 7, grit: 10, aggression: 8, accuracy: 3 } },
+  { id: 'h29', horse: 'Bonepicker', jockey: 'Mister Rattles', faction: 'wastelanders', tint: 'b', look: 'j3', silks: '#e8e0c8', weapon: 'crossbow', stats: { speed: 7, stamina: 6, grit: 4, aggression: 6, accuracy: 9 } },
+  { id: 'h30', horse: 'Dust Bowl Dolly', jockey: 'Mae Harrow', faction: 'wastelanders', tint: 'b', look: 'j4', silks: '#c09050', weapon: 'flare_gun', stats: { speed: 8, stamina: 7, grit: 6, aggression: 4, accuracy: 7 } },
+  { id: 'h31', horse: 'Chain Gang', jockey: 'Cutter Joe', faction: 'wastelanders', tint: 'b', look: 'j5', silks: '#505050', weapon: 'chain', stats: { speed: 7, stamina: 6, grit: 8, aggression: 9, accuracy: 4 } },
+  { id: 'h32', horse: 'Sunday Best', jockey: 'Prim Ashworth', faction: 'vault', tint: 'b', look: 'j1', silks: '#f0a0b0', weapon: 'flare_gun', stats: { speed: 8, stamina: 6, grit: 5, aggression: 4, accuracy: 8 } },
+  { id: 'h33', horse: 'Trust Fund', jockey: 'Lady Celeste Marr', faction: 'vault', tint: 'b', look: 'j2', silks: '#a080e0', weapon: 'shotgun', stats: { speed: 7, stamina: 7, grit: 6, aggression: 6, accuracy: 6 } },
+  { id: 'h34', horse: 'Quiet Prayer', jockey: 'Brother Amos', faction: 'vault', tint: 'b', look: 'j3', silks: '#e0b040', weapon: 'cattle_prod', stats: { speed: 6, stamina: 9, grit: 8, aggression: 3, accuracy: 7 } },
+  { id: 'h35', horse: 'License to Trot', jockey: 'Agent Bishop', faction: 'vault', tint: 'b', look: 'j4', silks: '#203040', weapon: 'crossbow', stats: { speed: 8, stamina: 6, grit: 5, aggression: 5, accuracy: 9 } },
+  { id: 'h36', horse: "Overseer's Pet", jockey: 'Vault Kid Wren', faction: 'vault', tint: 'b', look: 'j5', silks: '#3060e0', weapon: 'pipe', stats: { speed: 9, stamina: 6, grit: 5, aggression: 6, accuracy: 5 } },
 ];
 export const DERBY_ROSTER_BY_ID: Record<string, DerbyHorseDef> = Object.fromEntries(DERBY_ROSTER.map((h) => [h.id, h]));
 

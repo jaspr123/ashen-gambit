@@ -50,12 +50,12 @@ export function DerbyScreen() {
       {st && focus && <FocusBar st={st} now={now} credits={credits} tau={tau} />}
       {st && !focus && (
         <>
-          <div style={{ position: 'absolute', top: 70, left: 16, bottom: 16, width: 470, display: 'flex', flexDirection: 'column', gap: 12 }} className="pe-auto">
+          <div style={{ position: 'absolute', top: 70, left: 16, bottom: 16, width: 470, display: 'flex', flexDirection: 'column', gap: 12, overflowY: 'auto' }} className="pe-auto">
             <RaceHeader st={st} now={now} credits={credits} />
             {live || st.phase === 'results' ? <Standings st={st} tau={tau} /> : <RaceCard st={st} selected={selected} />}
             <TrackSide st={st} />
           </div>
-          <div style={{ position: 'absolute', top: 70, right: 16, bottom: 16, width: 350, display: 'flex', flexDirection: 'column', gap: 12 }} className="pe-auto">
+          <div style={{ position: 'absolute', top: 70, right: 16, bottom: 16, width: 350, display: 'flex', flexDirection: 'column', gap: 12, overflowY: 'auto' }} className="pe-auto">
             {st.phase === 'betting' ? <><BetSlip st={st} selected={selected} credits={credits} /><BackRoom st={st} credits={credits} /></> : <Commentary st={st} tau={tau} />}
             <MyBets st={st} />
             {(live || st.phase === 'results') && (
@@ -108,7 +108,7 @@ function RaceHeader({ st, now, credits }: { st: DerbyState; now: number; credits
 // ------------------------------------------------------------------ race card
 function RaceCard({ st, selected }: { st: DerbyState; selected: string | null }) {
   return (
-    <Panel title="Race card" right={<span className="faint mono" style={{ fontSize: 11 }}>odds: win · place · show</span>} className="grow" style={{ minHeight: 0 }} bodyClass="scroll">
+    <Panel title="Race card" right={<span className="faint mono" style={{ fontSize: 11 }}>odds: win · place · show</span>} className="grow" style={{ minHeight: 190 }} bodyClass="scroll">
       <div className="col" style={{ gap: 6 }}>
         {st.runners.map((r) => (
           <button key={r.id} className="list-item" onClick={() => useDerby.getState().select(selected === r.id ? null : r.id)}
@@ -227,7 +227,7 @@ function BackRoom({ st, credits }: { st: DerbyState; credits: number }) {
   const horse = backed.find((r) => r.id === target) ?? backed[0];
   const owned = new Set(st.myUpgrades.filter((u) => u.runnerId === horse?.id).map((u) => u.upgradeId));
   return (
-    <Panel title="Back room" right={<span className="chip cyan" style={{ fontSize: 10 }}>secret</span>} className="grow" style={{ minHeight: 0 }} bodyClass="scroll">
+    <Panel title="Back room" right={<span className="chip cyan" style={{ fontSize: 10 }}>secret</span>} className="grow" style={{ minHeight: 190 }} bodyClass="scroll">
       {!horse ? <div className="empty">Back a horse and the stable hands will talk to you. Pay them to give it an edge. The odds won't move, and nobody else will know.</div> : (
         <div className="col" style={{ gap: 6 }}>
           {backed.length > 1 && <Seg<string> value={horse.id} onChange={setTarget} options={backed.map((r) => ({ value: r.id, label: `#${r.number}` }))} />}
@@ -298,7 +298,7 @@ function Standings({ st, tau }: { st: DerbyState; tau: number }) {
   const lead = rows[0]?.s ?? 0;
   const progress = Math.max(0, Math.min(1, lead / st.distance));
   return (
-    <Panel title={st.phase === 'results' ? 'Final order' : 'Running order'} right={<span className="mono faint" style={{ fontSize: 11 }}>{Math.round(progress * 100)}%</span>} className="grow" style={{ minHeight: 0 }} bodyClass="scroll">
+    <Panel title={st.phase === 'results' ? 'Final order' : 'Running order'} right={<span className="mono faint" style={{ fontSize: 11 }}>{Math.round(progress * 100)}%</span>} className="grow" style={{ minHeight: 190 }} bodyClass="scroll">
       <div style={{ height: 4, background: 'rgba(255,255,255,0.08)', borderRadius: 2, marginBottom: 10 }}><div style={{ width: `${progress * 100}%`, height: '100%', background: 'var(--amber)', borderRadius: 2 }} /></div>
       <div className="col" style={{ gap: 4 }}>
         {rows.map((row, i) => {
@@ -328,7 +328,7 @@ function Commentary({ st, tau }: { st: DerbyState; tau: number }) {
     return tl.events.filter((e) => e.t <= tau && e.kind !== 'attack' && e.kind !== 'remount').slice(-9).reverse().map((e, i) => ({ key: `${e.t}-${e.kind}-${e.runner}-${i}`, t: e.t, text: describe(e, byId) }));
   }, [tl, tau, st.runners]);
   return (
-    <Panel title="Race call" className="grow" style={{ minHeight: 0 }} bodyClass="scroll">
+    <Panel title="Race call" className="grow" style={{ minHeight: 190 }} bodyClass="scroll">
       {st.phase === 'gates' && <div className="eyebrow pulse">Horses are in the gates. Betting is closed.</div>}
       <div className="col" style={{ gap: 6 }}>
         {lines.map((l, i) => <div key={l.key} style={{ fontSize: 13, opacity: 1 - i * 0.08 }}><span className="mono faint" style={{ fontSize: 10 }}>{l.t.toFixed(1)}s </span>{l.text}</div>)}

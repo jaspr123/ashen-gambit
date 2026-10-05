@@ -39,6 +39,12 @@ export interface DerbyOptions {
 }
 
 const rid = (p: string) => `${p}${crypto.randomBytes(5).toString('hex')}`;
+/** Unbiased Fisher-Yates shuffle (copies). */
+function shuffle<T>(list: readonly T[]): T[] {
+  const a = [...list];
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
 
 export class DerbyManager {
   private race: Race | null = null;
@@ -47,6 +53,8 @@ export class DerbyManager {
   private timers: NodeJS.Timeout[] = [];
   private raceCount = 0;
   private form = new Map<string, number[]>();
+  /** Runners in the previous race (kept off the next card when possible). */
+  private lastField = new Set<string>();
   private history: DerbyState['history'] = [];
   private broadcastTimer: NodeJS.Timeout | null = null;
   private timing: Record<keyof typeof DERBY_TIMING, number>;
@@ -215,8 +223,11 @@ export class DerbyManager {
   /** Draw a field and price it, spreading the Monte-Carlo over event-loop turns. */
   private async prepareCard(): Promise<Race> {
     const number = ++this.raceCount;
-    const pool = [...DERBY_ROSTER].sort(() => Math.random() - 0.5).slice(0, DERBY_FIELD);
-    const lanes = pool.map((_, i) => i).sort(() => Math.random() - 0.5);
+    // Fresh faces first: last race's runners only fill in if the rest of the roster runs short.
+    const fresh = shuffle(DERBY_ROSTER.filter((h) => !this.lastField.has(h.id)));
+    const pool = [...fresh, ...shuffle(DERBY_ROSTER.filter((h) => this.lastField.has(h.id)))].slice(0, DERBY_FIELD);
+    this.lastField = new Set(pool.map((h) => h.id));
+    const lanes = shuffle(pool.map((_, i) => i));
     const seed = crypto.randomInt(1, 2 ** 31);
     const entries = pool.map((def, i) => ({ id: def.id, lane: lanes[i], def }));
     const pricer = racePricer(seed ^ 0x5bd1e995, entries);

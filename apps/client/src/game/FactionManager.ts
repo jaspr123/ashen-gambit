@@ -82,12 +82,13 @@ class FactionManagerImpl {
     return new ProceduralVisual(buildProceduralPiece(this.fallbackFaction(id), pc, side), this.quality);
   }
 
-  /** Derby runner: variant 'b' is the second jockey/horse built for the Derby; 'a' is the faction knight. */
-  createDerbyVisual(id: BuiltinFactionId, variant: 'w' | 'b'): PieceVisual {
-    const d = variant === 'b' ? AssetManager.manifest?.derby?.[id]?.b : undefined;
+  /** Derby runner: 'w' is the faction knight; any other variant is a Derby-only model from the manifest
+   *  ('b', 'j1'..'j5'), falling back to the knight until it has loaded. */
+  createDerbyVisual(id: BuiltinFactionId, variant: string): PieceVisual {
+    const d = variant === 'w' ? undefined : AssetManager.manifest?.derby?.[id]?.[variant];
     const gltf = d ? AssetManager.peek(`/assets/${d.file}`) : null;
     const model = d && gltf ? AssetManager.cloneNode(gltf, d.node) : null;
-    if (!d || !gltf || !model) return this.createVisual(id, 'knight', variant);
+    if (!d || !gltf || !model) return this.createVisual(id, 'knight', variant === 'w' ? 'w' : 'b');
     const holder = new THREE.Group();
     holder.add(model);
     return new SkinnedVisual({ model: holder, clips: gltf.animations, clipMap: { ...SYNTY_CLIP_MAP, ...d.clips }, base: null, baseEmissive: [], mechanical: false });

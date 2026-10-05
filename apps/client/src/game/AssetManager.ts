@@ -30,7 +30,8 @@ export interface AssetManifest {
   animations?: { humanoid: string; clips: string[] };
   environment?: { file: string; props: string[] };
   /** Extra Derby jockey/horse variants per faction (variant 'b'). */
-  derby?: Partial<Record<BuiltinFactionId, { b?: { file: string; node: string; clips?: Partial<Record<GameAction, string>> } }>>;
+  /** Derby runner models per faction, keyed by look ('b' = second jockey, 'j1'..'j5' = extra runners). */
+  derby?: Partial<Record<BuiltinFactionId, Record<string, { file: string; node: string; clips?: Partial<Record<GameAction, string>> }>>>;
 }
 
 class AssetManagerImpl {
@@ -90,10 +91,11 @@ class AssetManagerImpl {
     await Promise.allSettled([...urls].map((u) => this.load(u)));
   }
 
-  /** Derby jockey variants (second rider + horse coat per faction). */
-  async preloadDerby() {
+  /** Derby runner models for one race card only (each is a full horse + rider, ~0.7 MB). */
+  async preloadDerby(runners: { faction: BuiltinFactionId; look: string }[]) {
     const m = await this.loadManifest();
-    await Promise.allSettled(Object.values(m?.derby ?? {}).map((d) => (d?.b ? this.load(`/assets/${d.b.file}`) : Promise.resolve(null))));
+    const files = new Set(runners.map((r) => m?.derby?.[r.faction]?.[r.look]?.file).filter((f): f is string => !!f));
+    await Promise.allSettled([...files].map((f) => this.load(`/assets/${f}`)));
   }
 
   /** Synchronous access to an already-loaded GLTF (null if not loaded yet). */

@@ -58,14 +58,18 @@ h1, h2, h3, h4 { font-family: var(--font-head); text-transform: uppercase; lette
   backdrop-filter: blur(8px) saturate(1.1);
   box-shadow: var(--shadow);
   position: relative;
+  /* Column so a scrolling body gets a bounded height when the panel is squeezed. */
+  display: flex;
+  flex-direction: column;
 }
 .panel::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 3px);
 }
-.panel-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.panel-head { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); }
 .panel-head h3 { font-size: 15px; color: var(--text); }
 .panel-body { padding: 12px 14px; }
+.panel-body.scroll { flex: 1; min-height: 0; overscroll-behavior: contain; }
 .hazard { height: 6px; background: repeating-linear-gradient(-45deg, var(--amber) 0 8px, #16130f 8px 16px); opacity: 0.85; }
 .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--line-strong), transparent); margin: 10px 0; }
 

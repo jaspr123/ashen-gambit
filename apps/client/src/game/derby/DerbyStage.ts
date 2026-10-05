@@ -23,6 +23,10 @@ interface RunnerView {
   label: THREE.Sprite;
   /** Compact number tag shown instead of the full label while racing. */
   tag: THREE.Sprite;
+  /** Aerial view: thin pole lifting the name card clear of the field. */
+  stick: THREE.Line;
+  /** Card height in the close views, and the horse's top (where the pole starts). */
+  labelY: number; topY: number;
   ring: THREE.Mesh;
   s: number; lat: number; v: number; hp: number; flags: number;
   down: boolean; jolt: number; fxAcc: number;
@@ -41,6 +45,9 @@ export class DerbyStage {
   private track: BuiltTrack;
   private runners = new Map<string, RunnerView>();
   private cardKey = '';
+  /** Race whose runner models are being fetched / have arrived. */
+  private modelsFor = '';
+  private modelsReady = '';
   private assetsReady = false;
   private hemi = new THREE.HemisphereLight('#ffd8b0', '#3a2818', 1.0);
   private sun = new THREE.DirectionalLight('#ffc890', 2.4);
@@ -70,7 +77,7 @@ export class DerbyStage {
     this.sun.shadow.bias = -0.0005;
     this.sun.shadow.normalBias = 0.03;
     this.root.add(this.sun, this.sun.target);
-    void Promise.all([FactionManager.preload([...FACTION_IDS]), AssetManager.preloadDerby()]).then(() => { this.assetsReady = true; this.cardKey = ''; });
+    void FactionManager.preload([...FACTION_IDS]).then(() => { this.assetsReady = true; this.cardKey = ''; });
   }
 
   setActive(on: boolean, scene: THREE.Scene) {
@@ -93,13 +100,20 @@ export class DerbyStage {
 
   // ------------------------------------------------------------------ runners
   private syncCard(st: DerbyState) {
-    const key = `${st.raceId}:${this.assetsReady}`;
+    if (this.modelsFor !== st.raceId) {
+      // Fetch this card's runner models; the field shows as faction knights until they arrive.
+      this.modelsFor = st.raceId;
+      const race = st.raceId;
+      void AssetManager.preloadDerby(st.runners.map((r) => ({ faction: r.faction, look: r.look ?? r.tint })))
+        .then(() => { if (this.modelsFor === race) { this.modelsReady = race; this.cardKey = ''; } });
+    }
+    const key = `${st.raceId}:${this.assetsReady}:${this.modelsReady === st.raceId}`;
     if (key === this.cardKey) return;
     this.cardKey = key;
     for (const r of this.runners.values()) { this.root.remove(r.holder); r.visual.dispose(); }
     this.runners.clear();
     for (const def of st.runners) {
-      const visual = FactionManager.createDerbyVisual(def.faction, def.tint);
+      const visual = FactionManager.createDerbyVisual(def.faction, def.look ?? def.tint);
       // Saddle-cloth in the runner's racing silks.
       visual.object.traverse((o) => {
         const m = o as THREE.Mesh;
@@ -125,11 +139,17 @@ export class DerbyStage {
       tag.position.y = label.position.y;
       tag.visible = false;
       holder.add(tag);
+      // Unit-height pole, scaled to the card height when the aerial view lifts the cards.
+      const stick = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 1, 0)]), new THREE.LineBasicMaterial({ color: def.silks }));
+      const topY = Math.max(1.2, visual.height);
+      stick.position.y = topY;
+      stick.visible = false;
+      holder.add(stick);
       const ring = new THREE.Mesh(new THREE.RingGeometry(0.62, 0.78, 32), new THREE.MeshBasicMaterial({ color: '#ffb347', transparent: true, opacity: 0.9, depthWrite: false }));
       ring.rotation.x = -Math.PI / 2; ring.position.y = 0.03; ring.visible = false;
       holder.add(ring);
       this.root.add(holder);
-      const view: RunnerView = { def, holder, visual, label, tag, ring, s: 0, lat: 0.5 + def.lane * TRACK.laneWidth, v: 0, hp: 100, flags: 0, down: false, jolt: 0, fxAcc: 0, pose: trackPose(0, 0) };
+      const view: RunnerView = { def, holder, visual, label, tag, stick, labelY: label.position.y, topY, ring, s: 0, lat: 0.5 + def.lane * TRACK.laneWidth, v: 0, hp: 100, flags: 0, down: false, jolt: 0, fxAcc: 0, pose: trackPose(0, 0) };
       this.runners.set(def.id, view);
       this.place(view, -0.9, view.lat, 0);
       visual.setLocomotion('idle');
@@ -146,6 +166,8 @@ export class DerbyStage {
   /** Parade line-up: side by side across the home straight, facing the grandstand. */
   private lineUpX(i: number) { return trackPose(TRACK.startAt + 7, 0).x + i * 1.55; }
   private static readonly LINE_LAT = 4.2;
+  private static readonly AERIAL_CARD_Y = 6;
+  private static readonly AERIAL_CARD_STEP = 3;
   private lineUp(r: RunnerView) {
     const p = trackPose(TRACK.startAt + 7 + r.def.lane * 1.55, DerbyStage.LINE_LAT, r.pose);
     r.holder.position.set(p.x, 0, p.z);
@@ -203,9 +225,18 @@ export class DerbyStage {
 
     // Selection / my-horse rings.
     const mine = new Set(st.myBets.map((b) => b.runnerId));
+    const aerial = racing && store.cam === 'aerial';
     for (const r of this.runners.values()) {
       const full = !racing || mine.has(r.def.id) || store.selected === r.def.id;
       r.label.visible = full; r.tag.visible = !full;
+      // From overhead the cards would sit right on the horses: raise them on poles, staggered by lane
+      // so a bunched field's cards don't stack on top of each other.
+      const y = aerial ? DerbyStage.AERIAL_CARD_Y + (r.def.lane % 3) * DerbyStage.AERIAL_CARD_STEP : r.labelY;
+      r.label.position.y = r.tag.position.y = y;
+      r.label.center.set(0.5, aerial ? 0 : 0.5);
+      r.tag.center.set(0.5, aerial ? 0 : 0.5);
+      r.stick.visible = aerial;
+      r.stick.scale.y = y - r.topY;
       r.ring.visible = mine.has(r.def.id) || store.selected === r.def.id;
       (r.ring.material as THREE.MeshBasicMaterial).color.set(store.selected === r.def.id ? '#6fe0ff' : '#ffb347');
     }
